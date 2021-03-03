@@ -29,12 +29,7 @@ class ShoppingCart extends React.Component{
         const total_discount = this.props.price_total+(this.props.price_total*0.1);
         const total_price = this.props.price_total;
         const cart_length = this.props.cart.length;
-
-        
-        
-      
         return <>
-
            <section id="shopping_cart_detail">
                 <div className="shopping_cart-intro">
                     <h2>Giỏ Hàng Của Bạn</h2>

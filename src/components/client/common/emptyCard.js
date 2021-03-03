@@ -8,7 +8,7 @@ export default function EmptyCart(){
                 <div>
                 <CardImg style={{"width":"50%"}} src="https://ezcookingbaking.myhartono.com/assets/uploads/images/cart_empty.png"></CardImg>
                     <h3 style={{"margin":"2rem"}}> Your Cart is Empty</h3>
-                    <Link to="/products">
+                    <Link to="/products/allproduct">
                         <Button color="primary"> 
                             Continue To Shopping
                         </Button>
