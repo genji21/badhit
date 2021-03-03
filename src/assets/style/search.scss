@@ -1,0 +1,134 @@
+#search_product_wrap{
+    // cot ben trai
+    .filter_search_product{
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        &>h4:first-child{
+            background-color: black;
+            color:white;
+            // width:80%;
+            margin: 20px 0 ;
+            padding:10px;
+        }
+        &>h4:nth-child(2){
+           color: #272727;
+            background: #e1e1e1;
+            margin-bottom: 10px;
+            // width: 80%;
+            padding:10px;
+
+        }
+        .type_search{
+            .type_search_clothes,.type_search_jewley{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                cursor: pointer;
+            }
+            .type_search_clothes>span,.type_search_jewley>span{
+                flex-basis: 60%;
+                text-align: left;
+            }
+            .type_search_price{
+                .price_item{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    margin:15px 0;
+                    cursor: pointer;
+                    & .icon_circle{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        border:1px solid;
+                        // background-color: rgb(146, 23, 60);
+                        & svg{
+                            display: none;
+                            
+                            font-size: 1.2rem;
+                            color:white;
+                            // z-index: 9999;
+                        }
+                    }
+                    & >span{
+                        flex-basis:60%;
+                        text-align: left;
+                        cursor: pointer;
+                        color: #636363;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    hr{
+        border:1px solid 
+    }
+    // end cot ben trai
+    .section_result-search{
+        margin-top: 20px;
+        .resutl_title{
+            text-align: left;
+            & h4{
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+        }
+        .card{
+            border: none;
+            margin: 10px 0;
+            &:hover{
+                box-shadow: 0 0 8px rgba(0,0,0,0.3);
+            }
+        }
+        .card-title,.card-text{
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+        .card-title:hover,.card-text:hover{
+            
+        }
+        .card-img{
+            max-width: 100%;
+        }
+        .notfound{
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: #8f8f8f;
+            margin: 0 auto;
+            img{
+                opacity: .6;
+                -webkit-animation-name: float-ani;
+                /* animation-name: float-ani; */
+                -webkit-animation-duration: 3s;
+                animation-duration: 2s;
+                -webkit-animation-iteration-count: infinite;
+                /* animation-iteration-count: infinite; */
+                -webkit-animation-timing-function: ease;
+                animation-timing-function: ease;
+                animation-direction: alternate
+            }
+        }
+        @keyframes float-ani {
+            0%{
+                transform:translateY(20%)
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+    }
+
+    // cot ben phai
+
+}

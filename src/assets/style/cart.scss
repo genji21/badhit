@@ -1,0 +1,107 @@
+$color-primary:rgb(254, 72, 108);
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+}
+#shopping_cart_detail{
+    .product_item_detail_container{
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        &>input{
+            width: 18%;
+        }
+        &>.item_detail_price{
+            margin-left: auto;
+            width: 20%;
+            text-align: right !important;
+            &>.item_detail_price_wrap>svg
+            {
+                color:$color-primary;
+                font-size: 1.5rem;
+                margin-right: 10px;
+            }
+            &>.item_detail_price_wrap>span{
+                color:$color-primary;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+        }
+        &>.item_detail_name{
+            font-size: 1rem;
+            font-weight: 700;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
+            // max-width: 100%;
+            width: 200px;
+        }
+       & .card-body{
+            padding:0;
+            flex : 0 0 20%
+        }  
+       & .item-remove{
+        color:rgb(214, 69, 96) ;
+        cursor: pointer;
+        }
+    }
+   .productDetail_toTal{
+       text-align: left;
+       &>.productDetail_ToTal_Wrap{
+           &>.productDetail_Total_Num{
+               font-weight: 700;
+           }
+           &>.total_discount{
+            font-weight: 500;
+            color: #919191;
+           }
+           &>.total_discount_percent{
+            color: #ef4061;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 5px 0;
+           }
+           &>.total_ship{
+            color:#0a9c5f;
+            font-weight: 500;
+            font-size: 1rem;
+            margin: 5px 0;
+
+
+           }
+           &>button{
+            width: 100%;
+            background-color: #f06b83;
+            color: white;
+            padding: 12px 0;
+            margin:10px 0;
+            transition: 0.4s;
+           
+           }
+           &>button>a{
+               color: white;
+               text-decoration: none;
+
+         }
+           &>button.active:hover{
+                background-color: rgb(214, 69, 96) !important;
+
+           }
+           &>.Security>.Security_Wrapped{
+               margin:10px 0;
+           }
+           
+       }
+   }
+   .quanity-input{
+    border-right: none;
+    margin-left: auto;
+   }
+   .quanity-input input{
+       width: 50px;
+       border: none;
+   }
+  
+}

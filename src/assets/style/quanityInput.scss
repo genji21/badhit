@@ -1,0 +1,26 @@
+.quanity-input{
+    display: flex;
+    border: 1px solid grey;
+    justify-content: space-between;
+    text-align: center;
+    .button-wrap{
+        display: flex;
+        flex-direction: column;
+    }
+    & div{
+        padding:0;
+    }
+    .quanity {
+        margin-left: 20px;
+      line-height: 48px;
+    }
+    .add,.minus{
+        border: 1px solid grey;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+

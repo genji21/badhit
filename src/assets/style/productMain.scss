@@ -1,0 +1,120 @@
+// *{
+//     box-sizing: border-box !important;
+    
+
+// }
+
+#main-product{
+    a{
+        color:black;
+    }
+    h5{
+        margin: 50px 0;
+    }
+    &>h2{
+        text-align: center;
+    // font-size: 28px;
+    /* font-family: openb; */
+    /* padding-bottom: 20px; */
+    text-transform: uppercase;
+    margin: 20px 0;
+    }
+    & div.card{
+        margin-top: 10px;
+        border: none;
+        .card-body{
+            position:relative;
+            padding:0;
+            .lazy-load-image-background:nth-child(2){
+                position: absolute;
+                top:0;
+                left:0;
+                &>img{
+                    opacity: 0;
+                    transition: 0.2s;
+                    
+                }
+
+            }
+        &:hover .lazy-load-image-background:nth-child(2)>img{
+            opacity: 1;
+        }
+        }
+    }
+   .category-product{
+    .category-row{
+           display:flex;
+           justify-content: space-between;
+           div{
+           cursor: pointer;
+           
+
+           }
+       }
+   }
+}
+
+ 
+.banenr-end{
+    width: 100vw;
+    padding: 20px;
+    background-color: black;
+}
+.wrapped{
+    transition: all 0.8s;
+    width: 100%;
+    height: 100%;
+}
+.wrapped.active{
+
+}
+a.linksp{
+    color:inherit;
+}
+a.linksp:hover{
+    color: #0056b3;
+    text-decoration: none
+}
+
+
+
+.section_page{
+    margin: 20px 0;
+    .pageniation_icon-wrap{
+        display: flex;
+        width: 20%;
+        margin: 0 auto;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .pageniation_icon-wrap svg,.pageniation_icon-wrap span{
+        cursor: pointer;
+        color:grey;
+        font-size: 1.2rem;
+    }
+}
+// 
+#search_product_wrap{
+    div.card{
+            margin-top: 10px;
+            border: none;
+            .card-body{
+                position:relative;
+                padding:0;
+                .lazy-load-image-background:nth-child(2){
+                    position: absolute;
+                    top:0;
+                    left:0;
+                    &>img{
+                        opacity: 0;
+                        transition: 0.2s;
+                        
+                    }
+        
+                }
+            &:hover .lazy-load-image-background:nth-child(2)>img{
+                opacity: 1;
+            }
+            }
+        }
+}
