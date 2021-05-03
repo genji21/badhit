@@ -107,7 +107,7 @@ const regexPass = /^(?=.*[A-Za-z])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])
                           </FormGroup>
                           <FormGroup >
                               <Label for="password_register">Mật Khẩu</Label>
-                              <Input name="password" placeholder="Nhập mật khẩu của bạn" id="password_register"    onChange={props.handleChange}
+                              <Input name="password" type="password" placeholder="Nhập mật khẩu của bạn" id="password_register"    onChange={props.handleChange}
                             onBlur={props.handleBlur}
                             value={props.values.password}  /> 
                               

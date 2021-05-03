@@ -71,16 +71,12 @@ function App() {
       new_cart =[...state.cart];
       new_cart[exist_product_index].quanity = new_cart[exist_product_index].quanity  + action.payload.quanity
      localStorage.cart =JSON.stringify(new_cart)
-
      }
-
-
       return {
         ...state,  // lấy lại những state cũ , bởi vì hàm này sẽ ghi dè lại bằng return  state mới
         cart: new_cart
         
       }
-      
     }
     else if(action.type ==="UPDATE_CART") {
       const exist_product_index = state.cart.findIndex(product=>product.id_cart===action.payload.id_cart);

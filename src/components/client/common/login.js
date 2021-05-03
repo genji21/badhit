@@ -14,7 +14,6 @@ class Login extends React.Component {
     state = {
         email:"",
         password:"",
-       
     }
     
     handleChange=(event)=>{
@@ -36,7 +35,7 @@ class Login extends React.Component {
             // window.localStorage.setItem('user_token',token);
 
             Swal.fire({
-                title:"Đăng nhập thành công",
+                title:"Đăng nhập thành công",   
                 timer : 1000,
                 icon:"success"
             })
@@ -55,7 +54,6 @@ class Login extends React.Component {
        
     }
     componentDidMount() { 
-     
         // khi trang hiển thị , kiểm tra có token chưa , nếu có token => admin hoặc trang thanh toán , nếu ko ở im trang này 
         const admin_token = window.localStorage.getItem('admin_token');
         if(admin_token){
@@ -67,8 +65,6 @@ class Login extends React.Component {
         return (<>
                 <Container fluid >
                 <Row className="login_form_container">
-                   
-
                     <Col lg="6" md="6" sm="6" xs='6' >
                         <div className="form_login-wrapped">
                                 <div className="form_login-title">
@@ -99,17 +95,8 @@ class Login extends React.Component {
                 </Row>
                 
                       
-                    
-                   
-                  
                 </Container>
-             
-        
-        
         </>
-
-           
-            
             )
         }
 }

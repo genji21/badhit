@@ -90,10 +90,6 @@ function Pagination(props){
         isSubmitted: false,
         loading:false
     }
-
-    
-
-
     componentDidMount(){
         let textCata = this.props.match.params.category
          let number_page = Number(this.props.location.search.replace(/[^0-9]/g,""))
@@ -122,8 +118,6 @@ function Pagination(props){
          
         axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?('?_page='+number_page):'?category='+textCata+'&_page='+number_page}`).then(res=>{
         this.props.getProductsItem(res.data)
-
-
         this.setState({
                  loading:false
              })
