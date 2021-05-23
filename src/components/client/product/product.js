@@ -15,6 +15,8 @@ export default function Product(props){
                            <CardBody>
                                <LazyLoadImage  delayTime effect="blur" style={{"width":"100%","height":"100%"}} src={props.img[0]}/>
                                <LazyLoadImage delayTime effect="blur" style={{"width":"100%","height":"100%"}} src={props.img[1]}/>
+                               {props.stock === 0 ? <img className="sold_out" src="http://theme.hstatic.net/1000351433/1000669365/14/sold_out.png?v=244"/>:"" }
+                              
                                <CardTitle>
                                     {props.name}
                                </CardTitle>

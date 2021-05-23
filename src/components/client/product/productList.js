@@ -205,7 +205,7 @@ function Pagination(props){
             return (
                 products.map((product,index)=>{
                     return (
-                        <Product category={product.category} loading={this.state.loading} key={`$product_${index}`} id={product.id} name={product.name} img={product.image} price={product.price}/>
+                        <Product category={product.category} stock={product.stock} loading={this.state.loading} key={`$product_${index}`} id={product.id} name={product.name} img={product.image} price={product.price}/>
                         
                     )
                 })

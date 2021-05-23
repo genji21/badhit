@@ -13,6 +13,8 @@ import {withRouter} from 'react-router-dom'
 import Breadcum from '../common/Breadcrumbs';
 import Swal from 'sweetalert2';
 import Loading2 from '../common/loading2'
+import Product from '../product/product'
+
 class ProductDetail extends React.Component {
     
     state={
@@ -27,6 +29,7 @@ class ProductDetail extends React.Component {
         opencart:false,
         loading2:false,
         stock:0,
+        products:[]
     }
     toggleOpen=()=>{
         this.setState({
@@ -59,7 +62,7 @@ class ProductDetail extends React.Component {
     }
      
 
-    componentDidMount() {
+  componentDidMount() {
        console.log()
 
         // document.querySelector(".toggleModalSearch").addEventListener("click",this.toggleOpen);
@@ -87,7 +90,12 @@ class ProductDetail extends React.Component {
             window.addEventListener('scroll', this.handleScroll);
 
             })
-        })
+        }).then( axios.get(`http://apishop1.herokuapp.com/products?category=${this.props.match.params.category}`).then(res=>{
+            this.setState({
+                products:res.data
+            })
+        }))
+       
       };
       
 
@@ -103,6 +111,10 @@ class ProductDetail extends React.Component {
             document.querySelector(".image_left").style.top="20%"
             
         }
+        else if(window.scrollY > 1300) {
+            console.log(window.scrollY)
+        }
+        console.log(window.scrollY)
       };
    
 
@@ -171,6 +183,8 @@ class ProductDetail extends React.Component {
           
        
       }
+    
+
       componentWillUnmount(){
         window.removeEventListener('scroll', this.handleScroll);
       }
@@ -178,7 +192,6 @@ class ProductDetail extends React.Component {
        
         return( <>
         <section id="category-list" style={{"textAlign":"left"}} >
-         
             <Breadcum url={window.location.pathname} />
         </section>
         {this.state.loading ? 
@@ -194,12 +207,34 @@ class ProductDetail extends React.Component {
                         
                        {/* Image Container Form */}
                         <ProductDetailForm value={this.state.quanity} changeInput = {this.handleChangeQuantity} addToCart={this.handleAddToCart} toggleCart={this.toggleOpenCart} product={this.state.products_detail} />
+
                     </Row>
+                   
                 </Container>
                {this.state.loading2?<Loading2/>:""}
 
             </section>
-             :<Loading/>}           
+             :<Loading/>}  
+                      {/*section product lien quan   */}
+            <section style={{"marginTop":"50px"}} id ="section_product_lq">
+                <Container fluid>
+
+                    <Row>
+                           {/*product  */}
+                           {/* <div  style={{"position":"absolute","left":"50%","bottom":0}}>
+                        {this.state.products.map((product,index)=>{
+                                return (
+                                    <Product category={product.category} loading={this.state.loading} key={`$product_${index}`} id={product.id} name={product.name} img={product.image} price={product.price}/>
+                            
+                                )
+                           })}
+                        </div>
+                            */}
+                    </Row>
+                </Container>
+                
+                
+                </section>          
                  {/* {this.state.open?<Modal/>:""} */}
                 {/* {this.state.opencart?<ModalCart/>:""} */}
         

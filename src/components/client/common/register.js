@@ -91,7 +91,7 @@ const regexPass = /^(?=.*[A-Za-z])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])
                                 await  Swal.fire({
                                   title:"Đăng nhập thành công",
                                   timer : 1000,
-                                  icon:"success"
+                                   icon:"success"
                               }).then(()=>{
                                 this.props.history.push("/user/profile")
                               })

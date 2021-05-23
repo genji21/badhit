@@ -34,7 +34,7 @@ export default class CartDetail extends React.Component{
                         text: `Sản phẩm ${this.props.products.name} chỉ còn ${this.state.stock} `,
                       })
                           this.setState({
-                              quanity:this.state.stock
+                              quanity:this.state.quanity-1
                           })
                 }
                 else {
