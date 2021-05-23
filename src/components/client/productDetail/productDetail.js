@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container ,Row } from 'reactstrap'
+import {Container ,Row, Spinner } from 'reactstrap'
 import '../../../assets/style/productdetail.scss'
 import ModalCart from '../common/ModalCart';
 import Modal from '../common/Modal';
@@ -11,7 +11,8 @@ import Loading from '../common/loading';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import Breadcum from '../common/Breadcrumbs';
-
+import Swal from 'sweetalert2';
+import Loading2 from '../common/loading2'
 class ProductDetail extends React.Component {
     
     state={
@@ -24,7 +25,8 @@ class ProductDetail extends React.Component {
         loading:false,
         open:false,
         opencart:false,
-        
+        loading2:false,
+        stock:0,
     }
     toggleOpen=()=>{
         this.setState({
@@ -74,12 +76,13 @@ class ProductDetail extends React.Component {
         // }
         const name = this.props.match.params.name.replace(/-/g," ")
 
-        axios.get(`https://badhit1234.herokuapp.com/products?name_like=${name}`).then(res=>{
+        axios.get(`https://apishop1.herokuapp.com/products?name_like=${name}`).then(res=>{
             console.log(res.data[0])
             console.log(res)
             this.setState({
                 products_detail:res.data[0],
-                loading:!this.state.loading
+                loading:!this.state.loading,
+                stock:res.data[0].stock
             },()=>{
             window.addEventListener('scroll', this.handleScroll);
 
@@ -103,20 +106,73 @@ class ProductDetail extends React.Component {
       };
    
 
-      handleAddToCart=(event)=>{
-         event.preventDefault();
+     handleAddToCart= async (event)=>{
+        event.preventDefault();
+        const stock = this.state.stock
 
-            this.props.addToCart({
-                ...this.state.products_detail,
-            },
-            this.state.quanity)
-
+         const user = window.localStorage.getItem('user_info')
+         const id_user = window.localStorage.getItem('id_user')
+         console.log(this.state.products_detail.stock)
+         if(!user){
+            window.location.pathname ="/account/login"
+        }
+        else {
+            if(this.state.quanity > stock) {
+                // await  axios.patch(`https://apishop1.herokuapp.com/products/${this.state.products_detail.id}`,{
+                //     "stock":0
+                // }).then(
+                //     this.setState({
+                //         loading2:!this.state.loading2
+                //     })
+                // )
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không đủ hàng.',
+                    text: `Sản phẩm chỉ còn ${stock} `,
+                  })
+            //    this.setState({
+            //        loading2:!this.state.loading2
+            //    })   
+       
+            }
+            else if(this.state.quanity <= stock) {
+               
+                await  axios.patch(`https://apishop1.herokuapp.com/products/${this.state.products_detail.id}`,{
+                    "stock":stock-this.state.quanity
+                }).then(
+                    this.setState({
+                        loading2:!this.state.loading2
+                    })
+                )
+                await axios.get(`https://apishop1.herokuapp.com/products/${this.state.products_detail.id}`).then(res=>{
+                    console.log(res.data.stock)
+                    this.setState({
+                        stock:res.data.stock,
+                        products_detail:res.data
+                    })
+                })
+              await   Swal.fire({
+               position: 'top-end',
+               icon: 'success',
+               title: `bạn vừa thêm ${this.state.quanity} sản phẩm`,
+               showConfirmButton: false,
+               timer:1000
+             }).then(
+                 this.setState({
+                     loading2:!this.state.loading2
+                 })
+             )
+                await  this.props.addToCart({
+                       ...this.state.products_detail
+                   },
+                     this.state.quanity,id_user,this.state.products_detail.id)
+               }
+            }
+          
+       
       }
       componentWillUnmount(){
         window.removeEventListener('scroll', this.handleScroll);
-        // document.querySelector(".toggleModalSearch").removeEventListener("click",this.toggleOpen);
-        // document.querySelector('.toggleModalCart').removeEventListener("click",this.toggleOpenCart);
-
       }
     render(){
        
@@ -135,12 +191,13 @@ class ProductDetail extends React.Component {
                        
                        {/* Image Container Mid */}
                        <ImagecontainerMid product={this.state.products_detail}/>
-
+                        
                        {/* Image Container Form */}
                         <ProductDetailForm value={this.state.quanity} changeInput = {this.handleChangeQuantity} addToCart={this.handleAddToCart} toggleCart={this.toggleOpenCart} product={this.state.products_detail} />
                     </Row>
                 </Container>
-               
+               {this.state.loading2?<Loading2/>:""}
+
             </section>
              :<Loading/>}           
                  {/* {this.state.open?<Modal/>:""} */}
@@ -155,12 +212,12 @@ class ProductDetail extends React.Component {
 const mapDispathtoProps = (dispath) =>{
 //store .dispath
 return {
-    addToCart : (product,quanity)=>{
+    addToCart : (product,quanity,id_user,idproduct)=>{
         dispath({
             type:"ADD_TO_CART",
             payload:{
                 ...product,
-                quanity
+                quanity,id_user,idproduct
             }
         })
     }

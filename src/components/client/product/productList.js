@@ -102,13 +102,12 @@ function Pagination(props){
         this.setState({
             loading:true
         })
-        axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+        axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
             this.props.getAllProducts(res.data)
-        })
+        })  
        if(this.props.location.search === '') {
-           axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?'':'?category='+textCata}`).then(res=>{
+           axios.get(`https://apishop1.herokuapp.com/products${textCata=='allproduct'?'':'?category='+textCata}`).then(res=>{
                textCata=='allproduct'?this.props.getProductsItem(res.data.slice(0,12)):this.props.getProductsItem(res.data)
-             
                this.setState({
                    loading:false
                })
@@ -116,7 +115,7 @@ function Pagination(props){
        }
        else {
          
-        axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?('?_page='+number_page):'?category='+textCata+'&_page='+number_page}`).then(res=>{
+        axios.get(`https://apishop1.herokuapp.com/products${textCata=='allproduct'?('?_page='+number_page):'?category='+textCata+'&_page='+number_page}`).then(res=>{
         this.props.getProductsItem(res.data)
         this.setState({
                  loading:false
@@ -139,7 +138,7 @@ function Pagination(props){
             loading:true
         })
         if(this.props.location.search === '') {
-            axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?'':'?category='+textCata}`).then((res)=>{
+            axios.get(`https://apishop1.herokuapp.com/products${textCata=='allproduct'?'':'?category='+textCata}`).then((res)=>{
             
                 this.props.getProductsItem(res.data)
                 this.setState({
@@ -152,7 +151,7 @@ function Pagination(props){
         }
         else {
             const page_number = this.props.location.search.replace(/[^0-9]/g,"")
-            axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?('?_page='+page_number):'?category='+textCata+'&_page='+page_number}`).then((res)=>{
+            axios.get(`https://apishop1.herokuapp.com/products${textCata=='allproduct'?('?_page='+page_number):'?category='+textCata+'&_page='+page_number}`).then((res)=>{
                 console.log(res.data)
                 this.props.getProductsItem(res.data)
                 this.setState({
@@ -175,7 +174,7 @@ function Pagination(props){
         loading:true
     })
     if(this.props.location.search === '') {
-        axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?'':'?category='+textCata}`).then((res)=>{
+        axios.get(`https://apishop1.herokuapp.com/products${textCata=='allproduct'?'':'?category='+textCata}`).then((res)=>{
             
             this.props.getProductsItem(res.data)
             this.setState({
@@ -184,7 +183,7 @@ function Pagination(props){
         })
     }
     else {
-        axios.get(`https://badhit1234.herokuapp.com/products${textCata=='allproduct'?('?_page='+number_page):'?category='+textCata+'&_page='+number_page}`).then((res)=>{
+        axios.get(`https://apishop1.herokuapp.com/products${textCata=='allproduct'?('?_page='+number_page):'?category='+textCata+'&_page='+number_page}`).then((res)=>{
             console.log(res.data)
             this.props.getProductsItem(res.data)
             this.setState({

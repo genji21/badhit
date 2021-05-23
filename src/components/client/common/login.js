@@ -10,10 +10,13 @@ import Swal from 'sweetalert2'
 import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux';
 import Breadcum from './Breadcrumbs';
+import Loading2 from './loading2'
+
 class Login extends React.Component {
     state = {
         email:"",
         password:"",
+        loading:false,
     }
     
     handleChange=(event)=>{
@@ -21,19 +24,21 @@ class Login extends React.Component {
             [event.target.name]:event.target.value
         })
     }
-    handleLogin=(event)=>{
+    handleLogin= async (event)=>{
         event.preventDefault()
-        Axios.post('https://badhit1234.herokuapp.com/login',{
+        this.setState({
+            loading:!this.state.loading
+        })
+      await  Axios.post('https://badhit1234.herokuapp.com/login',{
            ...this.state
-        }).then(res=>{
-            console.log(res.data)
-            console.log(res)
-            
+        }).then(res=>{          
             const token=res.data;
             window.localStorage.setItem('admin_token',token);
             window.localStorage.setItem('user_info',res.config.data)
             // window.localStorage.setItem('user_token',token);
-
+            this.setState({
+                loading:!this.state.loading
+            })
             Swal.fire({
                 title:"Đăng nhập thành công",   
                 timer : 1000,
@@ -41,7 +46,7 @@ class Login extends React.Component {
             })
         }).then(()=>{
             this.props.userLogin({...this.state})
-            
+           
             this.props.history.push('/user/profile')
         }).catch(err=>{
             console.log(err)
@@ -96,6 +101,8 @@ class Login extends React.Component {
                 
                       
                 </Container>
+                {this.state.loading?<Loading2/>:""}
+
         </>
             )
         }

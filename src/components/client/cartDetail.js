@@ -5,59 +5,107 @@ import {Link} from 'react-router-dom'
 import { BsTrash } from "react-icons/bs";
 import QuanityInput from './common/QuanityInput'
 import Swal from 'sweetalert2'
+import axios from 'axios'
+import Loading2 from './common/loading2'
+
 export default class CartDetail extends React.Component{
     state={
-        quanity:1
+        quanity:1,
+        products:{
+            id:null,
+            name:"",
+            image:[]
+        },
+        stock:0,
+        loading:false
     }
     handleChangeQuantity=(data,operator = false)=>{
         if(operator){
             if(this.state.quanity === 1 && data === -1){
               return this.setState({quanity:1})
             }
-            return this.setState({
+            return  this.setState({
                 quanity:this.state.quanity + data // 
-            },()=>{       // set lại state cart của store sau khi state input sản phẩm thay đổi
-                this.props.updateCart(this.props.products.id_cart,this.state.quanity)
+            },async ()=>{       // set lại state cart của store sau khi state input sản phẩm thay đổi
+                if(this.state.quanity > this.state.stock) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Không đủ hàng.',
+                        text: `Sản phẩm ${this.props.products.name} chỉ còn ${this.state.stock} `,
+                      })
+                          this.setState({
+                              quanity:this.state.stock
+                          })
+                }
+                else {
+              await  axios.patch(`http://apishop1.herokuapp.com/products/${this.props.products.id}`,{
+                    "stock":(this.state.stock+this.state.quanity)-(data === -1? this.state.quanity-1 : this.state.quanity+1)
+                }).then(
+                    this.setState({
+                        loading:!this.state.loading
+                    })
+                )
+                  await axios.get(`https://apishop1.herokuapp.com/products/${this.props.products.id}`).then(res=>{
+                    this.setState({
+                        stock:res.data.stock,
+                    })
+                })
+               await this.setState({
+                   loading:!this.state.loading
+               })
+               await  this.props.updateCart(this.props.products.id_cart,this.state.quanity)
+
+            }
             })
             
         }
-        if(data === 0 || data < 0){
-            return this.setState({quanity:1})
-        }
-        this.setState({
-            quanity: data
-        },()=>{
-            this.props.updateCart(this.props.products.id_cart,this.state.quanity)
-        })
+        // if(data === 0 || data < 0){
+        //     return this.setState({quanity:1})
+        // }
+        // this.setState({
+        //     quanity: data
+        // },()=>{
+        //     this.props.updateCart(this.props.products.id_cart,this.state.quanity)
+        // })
+        
     }
-    handleDeleteCart = ()=>{
-        Swal.fire({
-            title: 'Bạn có chắc muốn xóa sản phẩm này không?',
-            text: "",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            timer : 5000,
-            timerProgressBar:true,
-            
-          }).then((result) => {
-            if (result.isConfirmed) {
-               
-              Swal.fire(
-                'Xóa Thành Công',
-                'Sản phẩm đã bị xóa ',
-                'success'
-              )
-              this.props.deleteCart(this.props.products.id_cart)
-            }
+    handleDeleteCart = async ()=>{
+
+       await  axios.patch(`http://apishop1.herokuapp.com/products/${this.props.products.id}`,{
+            "stock":this.state.stock + this.state.quanity
+        }).then(
+            this.setState({
+                loading:!this.state.loading
+            })
+        )
+
+          await  this.props.deleteCart(this.props.products.id_cart)
+          await this.setState({
+              loading:!this.state.loading
           })
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `Xóa ${this.state.quanity} sản phẩm ${this.props.products.name} thành công`,
+            showConfirmButton: false,
+            timer: 1500
+          })
+         
+
+          
     }
     componentDidMount(){
+        // axios.get(`http://apishop1.herokuapp.com/products/${this.props.products.id}`).then(res=>{
+        //     this.setState({
+        //         quanity:this.props.products.quanity,
+        //         stock:res.data[0]
+        //     })
+        // })
         this.setState({
-            quanity:this.props.products.quanity
+            quanity:this.props.products.quanity,
+            stock:this.props.products.stock
         })
+       
     }
     render(){
     const {name,price,quanity,image,cart_id} = this.props.products;
@@ -72,7 +120,7 @@ export default class CartDetail extends React.Component{
                                                             </CardBody>
                                                                  <h3 className="item_detail_name">{name}</h3>
                                                             
-                                                               <QuanityInput onChange={this.handleChangeQuantity} value={quanity}/>
+                                                               <QuanityInput onChange={this.handleChangeQuantity} value={this.state.quanity}/>
                                                            
                                                             <CardBody style={{"textAlign":"left"}}  className="item_detail_price">
                                                                 <div className="item_detail_price_wrap">
@@ -92,10 +140,12 @@ export default class CartDetail extends React.Component{
                                                             </CardBody>
                                                         </div>
                                                     </Card>
+              
                                                    
                                                    
                                                     
                                                 </div>
+                                                {this.state.loading?<Loading2/>:""}
                                             
                                            
     </>

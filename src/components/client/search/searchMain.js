@@ -63,7 +63,7 @@ class SearchMain extends React.Component{
     }
     
     handleClick=(event)=>{
-        const url =`https://badhit1234.herokuapp.com/products?price_gte=${1}&price_lte=${100}`
+        const url =`https://apishop1.herokuapp.com/products?price_gte=${1}&price_lte=${100}`
         if(event.currentTarget.classList.contains("active")) {
             return false
          }
@@ -89,7 +89,7 @@ class SearchMain extends React.Component{
                     loading:true,
                     
                 },()=>{
-                    axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+                    axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
                         console.log(res.data)
                         const array = res.data.filter(function(item){
                             return item.price < 50
@@ -114,7 +114,7 @@ class SearchMain extends React.Component{
                     loading:true,
 
                 },()=>{
-                    axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+                    axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
                         console.log(res.data)
                         const array = res.data.filter(function(item){
                             return item.price > 100 && item.price < 200
@@ -139,7 +139,7 @@ class SearchMain extends React.Component{
                      loading:true,
 
                  },()=>{
-                     axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+                     axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
                          console.log(res.data)
                          const array = res.data.filter(function(item){
                              return item.price > 200 && item.price < 400
@@ -165,7 +165,7 @@ class SearchMain extends React.Component{
                          loading:true,
 
                      },()=>{
-                         axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+                         axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
                              console.log(res.data)
                              const array = res.data.filter(function(item){
                                  return item.price > 400 && item.price < 800
@@ -191,7 +191,7 @@ class SearchMain extends React.Component{
                              product:[],
                              loading:true,
                          },()=>{
-                             axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+                             axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
                                  console.log(res.data)
                                  const array = res.data.filter(function(item){
                                      return item.price > 800 && item.price < 1000
@@ -216,7 +216,7 @@ class SearchMain extends React.Component{
                              product:[],
                              loading:true,
                          },()=>{
-                             axios.get(`https://badhit1234.herokuapp.com/products`).then(res=>{
+                             axios.get(`https://apishop1.herokuapp.com/products`).then(res=>{
                                  console.log(res.data)
                                  const array = res.data.filter(function(item){
                                      return item.price > 1000
@@ -245,7 +245,7 @@ class SearchMain extends React.Component{
                 loading:true,
                 value : this.props.value_name
             },()=>{
-                axios.get(`https://badhit1234.herokuapp.com/products?name_like=${this.props.value_name}`).then(res=>{
+                axios.get(`https://apishop1.herokuapp.com/products?name_like=${this.props.value_name}`).then(res=>{
                     console.log(res.data)
                     this.setState({
                         product:res.data,
@@ -262,7 +262,7 @@ class SearchMain extends React.Component{
                 loading:true,
                 value : this.props.value_name
             },()=>{
-                axios.get(`https://badhit1234.herokuapp.com/products?name_like=${this.props.value_name}`).then(res=>{
+                axios.get(`https://apishop1.herokuapp.com/products?name_like=${this.props.value_name}`).then(res=>{
                     console.log(res.data)
                     this.setState({
                         product:res.data,

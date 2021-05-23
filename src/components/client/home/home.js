@@ -70,14 +70,14 @@ export default class Home extends React.Component{
     
                     <Slider { ...settings } >
                     <div>
-                        <img alt="Anh 1" src="https://theme.hstatic.net/1000351433/1000471586/14/slideshow_1.jpg?v=547"></img>
+                        <img alt="Anh 1" src="http://theme.hstatic.net/1000351433/1000669365/14/slideshow_1.jpg?v=244"></img>
                     </div>
                     <div>
                     <img alt="anh2" src="https://theme.hstatic.net/1000351433/1000471586/14/slideshow_2.jpg?v=547"></img>
                         
                     </div>
                     <div>
-                    <img alt="anh3" src="https://theme.hstatic.net/1000351433/1000471586/14/slideshow_3.jpg?v=547"></img>
+                    <img alt="anh3" src="http://theme.hstatic.net/1000351433/1000669365/14/banner_index_2.jpg?v=244"></img>
                         
                     </div>
                     

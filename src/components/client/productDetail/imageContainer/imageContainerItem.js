@@ -15,8 +15,6 @@ export default function ProductImageLeft(props){
     return (<>
          <Card  onClick={handleClick}  className="product_item_img">
                                    <a href={`#product_${props.id}`}>
-                                       
-                                       
                                   <CardImg onError={ErrorImg}  src={props.srcImg} alt="Hinh" />     
                                        
                                 </a>

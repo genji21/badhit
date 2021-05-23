@@ -6,6 +6,8 @@ import { Col, Container,  FormGroup, Input, Label, Row ,Button, FormText} from '
 import Swal from 'sweetalert2';
 import { withFormik, Field,Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import Loading2 from './loading2'
+
 class Signup extends Component {
  
   state = {
@@ -14,7 +16,8 @@ class Signup extends Component {
     email: "",
     diachi:"",
     phone:"",
-    sodienthoai:""
+    sodienthoai:"",
+    loadig:false
   }
 
   
@@ -66,13 +69,20 @@ const regexPass = /^(?=.*[A-Za-z])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])
                      <Formik  validationSchema={validationSchema}  
                            initialValues={{ email: 'jared',password:"",username:"",address:"",phone:""}} 
                             onSubmit={async (values, actions) => {
-                              await Axios.post('https://badhit1234.herokuapp.com/sign-in',{...values})
-                                  await   Swal.fire({
+                              await this.setState({
+                                loading:!this.state.loading
+                              })
+                              await Axios.post('https://apishop1.herokuapp.com/sign-in',{...values,})
+                                     Swal.fire({
                                     title:"Đăng ký  thành công",
                                     timer : 2000,
                                     icon:"success"
                                 })
-                                await Axios.post('https://badhit1234.herokuapp.com/login',{...values}).then(
+                               await this.setState({
+                                  loading:!this.state.loading
+                                })
+                                await this.props.userPostFetch({...values})
+                                await Axios.post('https://apishop1.herokuapp.com/login',{...values,}).then(
                                 (res)=>{ 
                                   const token=res.data;
                                   window.localStorage.setItem('admin_token',token);
@@ -85,8 +95,6 @@ const regexPass = /^(?=.*[A-Za-z])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])
                               }).then(()=>{
                                 this.props.history.push("/user/profile")
                               })
-                               
-                                
 }}
 >                                   
                        {(props) => (
@@ -163,6 +171,8 @@ const regexPass = /^(?=.*[A-Za-z])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])
          
         
       </Container>
+      {this.state.loading?<Loading2/>:""}
+
       </>
     )
   }
@@ -207,13 +217,13 @@ const mapDispatchToProps = dispatch => ({
 //   }), handleSubmit: async function (values, { setSubmitting })  {
 //     // const data =this.props.values
 //     console.log(values)
-//     await Axios.post('https://badhit1234.herokuapp.com/sign-in',{...values})
+//     await Axios.post('https://apishop1.herokuapp.com/sign-in',{...values})
 //     await   Swal.fire({
 //       title:"Đăng ký  thành công",
 //       timer : 2000,
 //       icon:"success"
 //   })
-//   await Axios.post('https://badhit1234.herokuapp.com/login',{...values}).then(
+//   await Axios.post('https://apishop1.herokuapp.com/login',{...values}).then(
 //   (res)=>{ 
 //     const token=res.data;
 //     window.localStorage.setItem('admin_token',token);

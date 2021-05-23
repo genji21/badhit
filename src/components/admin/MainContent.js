@@ -16,7 +16,7 @@ export default class MainContent extends React.Component{
 
     componentDidMount(){
         console.log("DIDMOUNT")
-        axios.get("https://badhit1234.herokuapp.com/products").then(res=>{
+        axios.get("https://apishop1.herokuapp.com/products").then(res=>{
             console.log(res);
             this.setState({
                 products:res.data

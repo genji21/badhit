@@ -9,6 +9,7 @@ import * as Yup from 'yup'
 import FormikForm from './user_profile'
 import DatePicker from 'react-date-picker';
 import User_Cart from './user_cart';
+import {connect} from 'react-redux'
 
 
 
@@ -24,20 +25,16 @@ state = {
     componentDidMount(){
         if(window.location.pathname === "/user" || window.location.pathname === "/user/") {
             window.location.replace("https://badhit1234.herokuapp.com/user/profile");
-            // window.localStorage.setItem('user','')
         }
     }
     handleLogout=()=>{
         window.localStorage.removeItem('admin_token')
-        window.localStorage.removeItem('user')
-
+        window.localStorage.removeItem('user_info')
+        this.props.completeCart();
         this.props.history.goBack()
     }
     render(){
-       
-       
-        return (<>
-        
+        return (<>      
                 <section id="home_user_container">
                     <Container>
                         <Row>
@@ -110,5 +107,16 @@ state = {
     }
 }
 // 
-
-export default withRouter(User_Home) 
+const mapDispathToProps = dispatch =>{
+    return {
+        completeCart:(user_info)=>{
+            dispatch({
+                type : "COMPLETE_CART",
+                payload:{
+                    ...user_info
+                }
+            })
+        }
+    }
+}
+export default connect(null,mapDispathToProps)(withRouter(User_Home))

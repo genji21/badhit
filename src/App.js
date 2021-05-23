@@ -60,7 +60,8 @@ function App() {
        ...state.cart
        ,{
          ...action.payload,
-         id_cart:Date.now()
+         id_cart:Date.now(),
+         status:false
        }
         ]
      window.localStorage.setItem('cart',JSON.stringify(new_cart))

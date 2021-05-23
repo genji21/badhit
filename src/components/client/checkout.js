@@ -105,7 +105,7 @@ function UserAddress(props){
         "id_cart":Date.now(),
         "date_cart":new Date()
       }
-     await Axios.post("https://badhit1234.herokuapp.com/cart",{...user_cart_final}).then(res=>{
+     await Axios.post("https://apishop1.herokuapp.com/cart",{...user_cart_final}).then(res=>{
         Swal.fire({
             title:"Đặt Hàng Thành Công ",
             timer : 1000,

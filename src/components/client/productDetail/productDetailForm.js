@@ -3,13 +3,8 @@ import React from 'react';
 import { Col, Container, FormGroup,InputGroup ,Label, Row ,Form,Input,Button} from 'reactstrap';
 import QuanityInput from '../common/QuanityInput';
 export default class ProductDetailForm extends React.Component{
-  
-  
-  
     render(){
-
     const {name,price} = this.props.product
-    
         return <>
           <Col className="product-detail-right" lg={4}>
                             <div className="product_intro_wrapped" style={{"textAlign":"left"}}>

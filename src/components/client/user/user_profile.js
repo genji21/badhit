@@ -40,7 +40,6 @@ state = {
  
     var file = files[0];
     var fileReader = new FileReader();
-
     fileReader.onload= (event)=>{
         var url = fileReader.result;
         this.setState({
